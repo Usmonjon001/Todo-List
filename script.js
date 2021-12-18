@@ -19,6 +19,7 @@ if(data){
 }
 
 function addTodo(value){
+        save.disabled = false;
         let wrapperCard = document.createElement('div');
         wrapperCard.setAttribute('class', 'todo-list-item');
     
@@ -78,5 +79,6 @@ save.addEventListener('click', function(){
         }
     }
     localStorage.setItem('todo', JSON.stringify(localdata))
+    save.disabled = true;
 })
 
