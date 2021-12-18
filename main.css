@@ -6,7 +6,9 @@
 
 body {
     font-family: arial;
-
+    background-image: url('./todo.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .title {
@@ -86,4 +88,12 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 15px 5px;
+}
+
+@media screen and (max-width: 768px) {
+    .container{
+        width: 350px;
+        margin: 250px auto;
+        border: 1px solid red;
+    }
 }
