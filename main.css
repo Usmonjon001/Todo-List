@@ -78,3 +78,12 @@ body {
     border: none;
     margin-right: 0px;
 }
+
+.todo-list-item{
+    background-color: #fff;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 5px;
+}

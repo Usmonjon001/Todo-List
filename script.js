@@ -1,44 +1,82 @@
-// Taking Values
-let mainBtn = document.getElementById('mainBtn')
 let mainInput = document.getElementById('input')
-let save = document.getElementById('save')
-console.log(save);
-
-// Cotainer Todo
+let submit = document.getElementById('mainBtn')
 let todo = document.getElementById('todo')
+let save = document.getElementById('save')
 
-mainBtn.addEventListener('click', function(){
-    // Creating Elements
-    let todoList = document.createElement('div')
-    todoList.setAttribute('class', 'todo-list');
-    let todoInput = document.createElement('input')
-    todoInput.setAttribute('class', 'todo-input')
-    let deleteBtn = document.createElement('buttom')
-    deleteBtn.setAttribute('id', 'delete')
-    let editBtn = document.createElement('buttom')
-    editBtn.setAttribute('id', 'edit')
-    // Values
-    todoInput.value = mainInput.value;
-    todoInput.disabled = true;
-    deleteBtn.innerHTML = 'Delete';
-    editBtn.innerHTML = 'Edit';
-    // Pushing Elements
-    todoList.appendChild(todoInput)
-    todoList.appendChild(editBtn)
-    todoList.appendChild(deleteBtn)    
-    // Push eletment to HTML
-    todo.appendChild(todoList)
-    mainInput.value = '';
+let localdata = []
 
-    editBtn.addEventListener('click', function(){
-        todoInput.disabled = false;
+submit.addEventListener('click', addTodo);
+
+let data = JSON.parse(localStorage.getItem('todo'))
+
+if(data){
+    console.log(data);
+    data.map(el => {
+        addTodo(el)
     })
-    todoInput.addEventListener('focusout', function(){
+} else {
+    console.log('Malumot Yo\'q');
+}
+
+function addTodo(value){
+        let wrapperCard = document.createElement('div');
+        wrapperCard.setAttribute('class', 'todo-list-item');
+    
+        let todoInput = document.createElement('input');
+        todoInput.setAttribute('class', 'todoInput')
+        
+        
+        todoInput.value =  mainInput.value ?  mainInput.value : value;
+    
+        let todoBtn = document.createElement('button')
+        todoBtn.setAttribute('class', 'edit')
+        todoBtn.innerHTML = 'Edit';
+    
+        let todoBtnDelete = document.createElement('button')
+        todoBtnDelete.setAttribute('class', 'delete')
+        todoBtnDelete.innerHTML = 'Delete';
+    
         todoInput.disabled = true;
-    })
+    
+        todoBtn.addEventListener('click', function(){
+            todoInput.disabled = false;
+        })
+    
+    
+        todoInput.addEventListener('focusout', function(){
+            todoInput.disabled = true;
+        })
+    
+        todoBtnDelete.addEventListener('click', function(){
+            wrapperCard.remove()
+        })
+    
+        
+    
+        wrapperCard.appendChild(todoInput);
+        wrapperCard.appendChild(todoBtn);
+        wrapperCard.appendChild(todoBtnDelete)
+        todo.appendChild(wrapperCard)
+        
+    
+        mainInput.value = '';
+    
+}
 
-    deleteBtn.addEventListener('click', function(){
-        todoList.remove()
-    })
+
+
+save.addEventListener('click', function(){
+    let wrapperCard = document.getElementsByClassName('todo-list-item')
+    let todoInput = document.getElementsByClassName('todoInput')
+    console.log(todoInput);
+    if(todoInput.length == 0){
+        alert('Hech qanday malumot kiritilmagan!')
+    } else{
+        for(el of todoInput){
+            console.log(el.value);
+            localdata.push(el.value);
+        }
+    }
+    localStorage.setItem('todo', JSON.stringify(localdata))
 })
 
