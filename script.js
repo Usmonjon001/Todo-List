@@ -69,6 +69,7 @@ function addTodo(value){
 save.addEventListener('click', function(){
     let wrapperCard = document.getElementsByClassName('todo-list-item')
     let todoInput = document.getElementsByClassName('todoInput')
+    localdata = []
     console.log(todoInput);
     if(todoInput.length == 0){
         alert('Hech qanday malumot kiritilmagan!')
